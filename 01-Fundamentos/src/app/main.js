@@ -100,6 +100,7 @@ function convertTemperature(value, from, to) {
     if (from === "k" && to === "f") {
         return (value - 273.15) * 9 / 5 + 32;
     }
+    throw new Error ("conversion de temperatura no valida");
 }
 
 function convertLength(value, from, to) {
@@ -134,6 +135,7 @@ function convertLength(value, from, to) {
     if (from === "cm" && to === "km") {
         return value / 100000;
     }
+    throw new Error ("conversion de longitud no valida");
 }
 
 // ===============================
@@ -148,6 +150,14 @@ if (isTempConversion) {
 
 if (isLengthConversion) {
     result = convertLength(value, from, to);
+}
+
+if (isTempConversion) {
+    result = convertTemperature(value, 
+        from, to);
+} else if (isLengthConversion) {
+    result = convertLength(value, from,
+        to);
 }
 
 console.log(`${result.toFixed(2)} ${to.toUpperCase()}`);
